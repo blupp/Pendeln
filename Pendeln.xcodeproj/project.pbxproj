@@ -1,0 +1,282 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5C5E124C14C40D14003C79F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5E124B14C40D14003C79F0 /* UIKit.framework */; };
+		5C5E124E14C40D14003C79F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5E124D14C40D14003C79F0 /* Foundation.framework */; };
+		5C5E125014C40D14003C79F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5E124F14C40D14003C79F0 /* CoreGraphics.framework */; };
+		5C5E125614C40D14003C79F0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5C5E125414C40D14003C79F0 /* InfoPlist.strings */; };
+		5C5E125814C40D14003C79F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E125714C40D14003C79F0 /* main.m */; };
+		5C5E125C14C40D14003C79F0 /* PendelnAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E125B14C40D14003C79F0 /* PendelnAppDelegate.m */; };
+		5C5E125F14C40D14003C79F0 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C5E125D14C40D14003C79F0 /* MainStoryboard.storyboard */; };
+		5C5E126214C40D14003C79F0 /* PendelnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E126114C40D14003C79F0 /* PendelnViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5C5E124714C40D14003C79F0 /* Pendeln.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pendeln.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C5E124B14C40D14003C79F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5C5E124D14C40D14003C79F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5C5E124F14C40D14003C79F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5C5E125314C40D14003C79F0 /* Pendeln-Info.plist */ = {isa = PBXFileReference; path = "Pendeln-Info.plist"; sourceTree = "<group>"; };
+		5C5E125514C40D14003C79F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5C5E125714C40D14003C79F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5C5E125914C40D14003C79F0 /* Pendeln-Prefix.pch */ = {isa = PBXFileReference; path = "Pendeln-Prefix.pch"; sourceTree = "<group>"; };
+		5C5E125A14C40D14003C79F0 /* PendelnAppDelegate.h */ = {isa = PBXFileReference; path = PendelnAppDelegate.h; sourceTree = "<group>"; };
+		5C5E125B14C40D14003C79F0 /* PendelnAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PendelnAppDelegate.m; sourceTree = "<group>"; };
+		5C5E125E14C40D14003C79F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		5C5E126014C40D14003C79F0 /* PendelnViewController.h */ = {isa = PBXFileReference; path = PendelnViewController.h; sourceTree = "<group>"; };
+		5C5E126114C40D14003C79F0 /* PendelnViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PendelnViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5C5E124414C40D14003C79F0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C5E124C14C40D14003C79F0 /* UIKit.framework in Frameworks */,
+				5C5E124E14C40D14003C79F0 /* Foundation.framework in Frameworks */,
+				5C5E125014C40D14003C79F0 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5C5E123C14C40D14003C79F0 = {
+			isa = PBXGroup;
+			children = (
+				5C5E125114C40D14003C79F0 /* Pendeln */,
+				5C5E124A14C40D14003C79F0 /* Frameworks */,
+				5C5E124814C40D14003C79F0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5C5E124814C40D14003C79F0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C5E124714C40D14003C79F0 /* Pendeln.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5C5E124A14C40D14003C79F0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5C5E124B14C40D14003C79F0 /* UIKit.framework */,
+				5C5E124D14C40D14003C79F0 /* Foundation.framework */,
+				5C5E124F14C40D14003C79F0 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5C5E125114C40D14003C79F0 /* Pendeln */ = {
+			isa = PBXGroup;
+			children = (
+				5C5E125A14C40D14003C79F0 /* PendelnAppDelegate.h */,
+				5C5E125B14C40D14003C79F0 /* PendelnAppDelegate.m */,
+				5C5E125D14C40D14003C79F0 /* MainStoryboard.storyboard */,
+				5C5E126014C40D14003C79F0 /* PendelnViewController.h */,
+				5C5E126114C40D14003C79F0 /* PendelnViewController.m */,
+				5C5E125214C40D14003C79F0 /* Supporting Files */,
+			);
+			path = Pendeln;
+			sourceTree = "<group>";
+		};
+		5C5E125214C40D14003C79F0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5C5E125314C40D14003C79F0 /* Pendeln-Info.plist */,
+				5C5E125414C40D14003C79F0 /* InfoPlist.strings */,
+				5C5E125714C40D14003C79F0 /* main.m */,
+				5C5E125914C40D14003C79F0 /* Pendeln-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5C5E124614C40D14003C79F0 /* Pendeln */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C5E126514C40D14003C79F0 /* Build configuration list for PBXNativeTarget "Pendeln" */;
+			buildPhases = (
+				5C5E124314C40D14003C79F0 /* Sources */,
+				5C5E124414C40D14003C79F0 /* Frameworks */,
+				5C5E124514C40D14003C79F0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pendeln;
+			productName = Pendeln;
+			productReference = 5C5E124714C40D14003C79F0 /* Pendeln.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5C5E123E14C40D14003C79F0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Bilddagboken AB";
+			};
+			buildConfigurationList = 5C5E124114C40D14003C79F0 /* Build configuration list for PBXProject "Pendeln" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 5C5E123C14C40D14003C79F0;
+			productRefGroup = 5C5E124814C40D14003C79F0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5C5E124614C40D14003C79F0 /* Pendeln */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5C5E124514C40D14003C79F0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C5E125614C40D14003C79F0 /* InfoPlist.strings in Resources */,
+				5C5E125F14C40D14003C79F0 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5C5E124314C40D14003C79F0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C5E125814C40D14003C79F0 /* main.m in Sources */,
+				5C5E125C14C40D14003C79F0 /* PendelnAppDelegate.m in Sources */,
+				5C5E126214C40D14003C79F0 /* PendelnViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5C5E125414C40D14003C79F0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5C5E125514C40D14003C79F0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5C5E125D14C40D14003C79F0 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5C5E125E14C40D14003C79F0 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5C5E126314C40D14003C79F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		5C5E126414C40D14003C79F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5C5E126614C40D14003C79F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pendeln/Pendeln-Prefix.pch";
+				INFOPLIST_FILE = "Pendeln/Pendeln-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5C5E126714C40D14003C79F0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pendeln/Pendeln-Prefix.pch";
+				INFOPLIST_FILE = "Pendeln/Pendeln-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5C5E124114C40D14003C79F0 /* Build configuration list for PBXProject "Pendeln" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C5E126314C40D14003C79F0 /* Debug */,
+				5C5E126414C40D14003C79F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C5E126514C40D14003C79F0 /* Build configuration list for PBXNativeTarget "Pendeln" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C5E126614C40D14003C79F0 /* Debug */,
+				5C5E126714C40D14003C79F0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5C5E123E14C40D14003C79F0 /* Project object */;
+}
