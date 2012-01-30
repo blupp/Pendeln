@@ -15,6 +15,9 @@
 		5C5E125C14C40D14003C79F0 /* PendelnAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E125B14C40D14003C79F0 /* PendelnAppDelegate.m */; };
 		5C5E125F14C40D14003C79F0 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C5E125D14C40D14003C79F0 /* MainStoryboard.storyboard */; };
 		5C5E126214C40D14003C79F0 /* PendelnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E126114C40D14003C79F0 /* PendelnViewController.m */; };
+		5C5E126A14C40D99003C79F0 /* PendelnTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E126914C40D99003C79F0 /* PendelnTableViewController.m */; };
+		5C5E127914CDCCF4003C79F0 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E127814CDCCF4003C79F0 /* Train.m */; };
+		5C5E12A014D149E6003C79F0 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E129F14D149E6003C79F0 /* Station.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,15 +25,21 @@
 		5C5E124B14C40D14003C79F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5C5E124D14C40D14003C79F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5C5E124F14C40D14003C79F0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		5C5E125314C40D14003C79F0 /* Pendeln-Info.plist */ = {isa = PBXFileReference; path = "Pendeln-Info.plist"; sourceTree = "<group>"; };
+		5C5E125314C40D14003C79F0 /* Pendeln-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Pendeln-Info.plist"; sourceTree = "<group>"; };
 		5C5E125514C40D14003C79F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5C5E125714C40D14003C79F0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		5C5E125914C40D14003C79F0 /* Pendeln-Prefix.pch */ = {isa = PBXFileReference; path = "Pendeln-Prefix.pch"; sourceTree = "<group>"; };
-		5C5E125A14C40D14003C79F0 /* PendelnAppDelegate.h */ = {isa = PBXFileReference; path = PendelnAppDelegate.h; sourceTree = "<group>"; };
-		5C5E125B14C40D14003C79F0 /* PendelnAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PendelnAppDelegate.m; sourceTree = "<group>"; };
+		5C5E125914C40D14003C79F0 /* Pendeln-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Pendeln-Prefix.pch"; sourceTree = "<group>"; };
+		5C5E125A14C40D14003C79F0 /* PendelnAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PendelnAppDelegate.h; path = Pendeln/PendelnAppDelegate.h; sourceTree = "<group>"; };
+		5C5E125B14C40D14003C79F0 /* PendelnAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PendelnAppDelegate.m; path = Pendeln/PendelnAppDelegate.m; sourceTree = "<group>"; };
 		5C5E125E14C40D14003C79F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		5C5E126014C40D14003C79F0 /* PendelnViewController.h */ = {isa = PBXFileReference; path = PendelnViewController.h; sourceTree = "<group>"; };
-		5C5E126114C40D14003C79F0 /* PendelnViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PendelnViewController.m; sourceTree = "<group>"; };
+		5C5E126014C40D14003C79F0 /* PendelnViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PendelnViewController.h; path = Pendeln/PendelnViewController.h; sourceTree = "<group>"; };
+		5C5E126114C40D14003C79F0 /* PendelnViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PendelnViewController.m; path = Pendeln/PendelnViewController.m; sourceTree = "<group>"; };
+		5C5E126814C40D99003C79F0 /* PendelnTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendelnTableViewController.h; sourceTree = "<group>"; };
+		5C5E126914C40D99003C79F0 /* PendelnTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendelnTableViewController.m; sourceTree = "<group>"; };
+		5C5E127714CDCCF4003C79F0 /* Train.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Train.h; sourceTree = "<group>"; };
+		5C5E127814CDCCF4003C79F0 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Train.m; sourceTree = "<group>"; };
+		5C5E129E14D149E5003C79F0 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
+		5C5E129F14D149E6003C79F0 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +59,7 @@
 		5C5E123C14C40D14003C79F0 = {
 			isa = PBXGroup;
 			children = (
+				5C5E127614CDC9BB003C79F0 /* Slask */,
 				5C5E125114C40D14003C79F0 /* Pendeln */,
 				5C5E124A14C40D14003C79F0 /* Frameworks */,
 				5C5E124814C40D14003C79F0 /* Products */,
@@ -77,11 +87,13 @@
 		5C5E125114C40D14003C79F0 /* Pendeln */ = {
 			isa = PBXGroup;
 			children = (
-				5C5E125A14C40D14003C79F0 /* PendelnAppDelegate.h */,
-				5C5E125B14C40D14003C79F0 /* PendelnAppDelegate.m */,
 				5C5E125D14C40D14003C79F0 /* MainStoryboard.storyboard */,
-				5C5E126014C40D14003C79F0 /* PendelnViewController.h */,
-				5C5E126114C40D14003C79F0 /* PendelnViewController.m */,
+				5C5E127714CDCCF4003C79F0 /* Train.h */,
+				5C5E127814CDCCF4003C79F0 /* Train.m */,
+				5C5E129E14D149E5003C79F0 /* Station.h */,
+				5C5E129F14D149E6003C79F0 /* Station.m */,
+				5C5E126814C40D99003C79F0 /* PendelnTableViewController.h */,
+				5C5E126914C40D99003C79F0 /* PendelnTableViewController.m */,
 				5C5E125214C40D14003C79F0 /* Supporting Files */,
 			);
 			path = Pendeln;
@@ -96,6 +108,17 @@
 				5C5E125914C40D14003C79F0 /* Pendeln-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5C5E127614CDC9BB003C79F0 /* Slask */ = {
+			isa = PBXGroup;
+			children = (
+				5C5E125A14C40D14003C79F0 /* PendelnAppDelegate.h */,
+				5C5E125B14C40D14003C79F0 /* PendelnAppDelegate.m */,
+				5C5E126014C40D14003C79F0 /* PendelnViewController.h */,
+				5C5E126114C40D14003C79F0 /* PendelnViewController.m */,
+			);
+			name = Slask;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,6 +187,9 @@
 				5C5E125814C40D14003C79F0 /* main.m in Sources */,
 				5C5E125C14C40D14003C79F0 /* PendelnAppDelegate.m in Sources */,
 				5C5E126214C40D14003C79F0 /* PendelnViewController.m in Sources */,
+				5C5E126A14C40D99003C79F0 /* PendelnTableViewController.m in Sources */,
+				5C5E127914CDCCF4003C79F0 /* Train.m in Sources */,
+				5C5E12A014D149E6003C79F0 /* Station.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
