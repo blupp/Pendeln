@@ -37,7 +37,7 @@
 {
     [super viewDidLoad];
 
-    trains = [Train getTrainsForLocation:@"Uppsala" withLimit:10];
+    trains = [Train getTrainsFromLocation:@"Uppsala" toDestination:@"Stockholm" withLimit:10];
 }
 
 - (void)viewDidUnload

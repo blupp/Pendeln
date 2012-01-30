@@ -20,10 +20,22 @@
     return departure;
 }
 
-+(NSArray *)fetchTrainDataForLocation:(NSString *)location {
++(NSNumber *)getStationId:(NSString *)fromLocation {
+    if([fromLocation isEqualToString:@"Uppsala"]) {
+        return [NSNumber numberWithInt:290];
+    } else if([fromLocation isEqualToString:@"Stockholm"]) {
+//TODO: check real station id for Stockholm
+        return [NSNumber numberWithInt:280];
+    } else {
+        // default: Uppsala
+        return [NSNumber numberWithInt:290];
+    }
+}
+
++(NSDictionary *)fetchTrainDataForLocation:(NSString *)location {
     
     // Fetch data based on location
-    NSString *urlString = @"http://tagtider:codemocracy@api.tagtider.net/v1/stations/290/transfers/departures.json";
+    NSString *urlString = [NSString stringWithFormat:@"http://tagtider:codemocracy@api.tagtider.net/v1/stations/%d/transfers/departures.json",[[self getStationId:location] intValue]];
     NSURL *url = [NSURL URLWithString:urlString];
     
     // get data from API
@@ -45,11 +57,22 @@
         return false;
     }
     
+    //NSLog(@"-----------------------------------");
+    //NSLog(@"%@",trains);
+    //NSLog(@"-----------------------------------");
+    
+    return trainData;
+}
+
++(NSArray *)getTrainsFromLocation:(NSString *)location toDestination:(NSString *)destination withLimit:(NSInteger)limit {
+    
+    NSDictionary *trainData = [Train fetchTrainDataForLocation:location];
+    
     NSDictionary *station = [trainData objectForKey:@"station"];
     NSArray *trains = [[station objectForKey:@"transfers"] objectForKey:@"transfer"];
     NSMutableArray *filteredTrains = [[NSMutableArray alloc] init];
     
-    // filter list based on location
+    // filter list based on destination
     for (NSDictionary *train in trains) {        
         NSString *destination = [train objectForKey:@"destination"];
         
@@ -65,20 +88,9 @@
             
             [filteredTrains addObject:realTrain];
         }
-    }    
-    
-    //NSLog(@"-----------------------------------");
-    //NSLog(@"%@",trains);
-    //NSLog(@"-----------------------------------");
+    } 
     
     return [NSArray arrayWithArray:filteredTrains];
-}
-
-+(NSArray *)getTrainsForLocation:(NSString *)location withLimit:(NSInteger)limit {
-    
-    NSArray *trains = [Train fetchTrainDataForLocation:location];
-    
-    return trains;
 }
 
 @end

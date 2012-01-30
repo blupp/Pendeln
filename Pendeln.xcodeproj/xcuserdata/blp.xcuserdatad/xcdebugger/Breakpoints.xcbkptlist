@@ -14,21 +14,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "16"
          endingLineNumber = "16"
-         landmarkName = "destination,track,trainNumber,departure,arrival,newdeparture,direct"
-         landmarkType = "19">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Pendeln/Train.m"
-         timestampString = "349619770.69118"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "24"
-         endingLineNumber = "24"
-         landmarkName = "+fetchTrainDataForLocation:"
+         landmarkName = "+filterDepartureString:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -37,25 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Pendeln/Train.m"
-         timestampString = "349619770.69118"
+         timestampString = "349620621.170549"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "56"
-         endingLineNumber = "56"
-         landmarkName = "+fetchTrainDataForLocation:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Pendeln/Train.m"
-         timestampString = "349619770.69118"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "57"
-         endingLineNumber = "57"
+         startingLineNumber = "36"
+         endingLineNumber = "36"
          landmarkName = "+fetchTrainDataForLocation:"
          landmarkType = "5">
       </FileBreakpoint>
