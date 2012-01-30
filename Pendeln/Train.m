@@ -42,9 +42,7 @@
     NSMutableArray *filteredTrains = [[NSMutableArray alloc] init];
     
     // filter list based on location
-    for (NSDictionary *traint in trains) {
-        NSMutableDictionary *train = [NSMutableDictionary dictionaryWithDictionary:traint];
-        
+    for (NSDictionary *train in trains) {        
         NSString *destination = [train objectForKey:@"destination"];
         
         if ([destination rangeOfString:@"Stockholm"].location != NSNotFound) {
@@ -56,8 +54,8 @@
             NSTextCheckingResult *match = [regex firstMatchInString:str options:0 range:NSMakeRange(0, [str length])];
             str = [str substringWithRange:[match rangeAtIndex:1]];
             
-            [train removeObjectForKey:@"departure"];
-            [train setObject:str forKey:@"departure"];
+            //[train removeObjectForKey:@"departure"];
+            //[train setObject:str forKey:@"departure"];
             
             [filteredTrains addObject:[NSDictionary dictionaryWithDictionary:train]];
         }
