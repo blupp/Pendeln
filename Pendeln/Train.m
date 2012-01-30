@@ -12,6 +12,14 @@
 
 @synthesize destination,track,trainNumber,departure,arrival,newdeparture,direct;
 
++(NSString *)filterDepartureString:(NSString *)departure {
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" ([0-9]+:[0-9]+)" options:0 error:NULL];
+    NSTextCheckingResult *match = [regex firstMatchInString:departure options:0 range:NSMakeRange(0, [departure length])];
+    departure = [departure substringWithRange:[match rangeAtIndex:1]];
+    
+    return departure;
+}
+
 +(NSArray *)fetchTrainDataForLocation:(NSString *)location {
     
     // Fetch data based on location
@@ -49,13 +57,7 @@
             // target match destination
             
             // make train-data more readable
-            NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" ([0-9]+:[0-9]+)" options:0 error:NULL];
-            NSString *departure = [train objectForKey:@"departure"];
-            NSTextCheckingResult *match = [regex firstMatchInString:departure options:0 range:NSMakeRange(0, [departure length])];
-            departure = [departure substringWithRange:[match rangeAtIndex:1]];
-            
-            //[train removeObjectForKey:@"departure"];
-            //[train setObject:str forKey:@"departure"];
+            NSString *departure = [self filterDepartureString:[train objectForKey:@"departure"]];
             
             Train *realTrain = [[Train alloc] init];
             realTrain.destination = destination;
