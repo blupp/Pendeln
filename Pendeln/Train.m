@@ -50,14 +50,18 @@
             
             // make train-data more readable
             NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" ([0-9]+:[0-9]+)" options:0 error:NULL];
-            NSString *str = [train objectForKey:@"departure"];
-            NSTextCheckingResult *match = [regex firstMatchInString:str options:0 range:NSMakeRange(0, [str length])];
-            str = [str substringWithRange:[match rangeAtIndex:1]];
+            NSString *departure = [train objectForKey:@"departure"];
+            NSTextCheckingResult *match = [regex firstMatchInString:departure options:0 range:NSMakeRange(0, [departure length])];
+            departure = [departure substringWithRange:[match rangeAtIndex:1]];
             
             //[train removeObjectForKey:@"departure"];
             //[train setObject:str forKey:@"departure"];
             
-            [filteredTrains addObject:[NSDictionary dictionaryWithDictionary:train]];
+            Train *realTrain = [[Train alloc] init];
+            realTrain.destination = destination;
+            realTrain.departure = departure;
+            
+            [filteredTrains addObject:realTrain];
         }
     }    
     
@@ -71,14 +75,6 @@
 +(NSArray *)getTrainsForLocation:(NSString *)location withLimit:(NSInteger)limit {
     
     NSArray *trains = [Train fetchTrainDataForLocation:location];
-    
-    Train *t1 = [[Train alloc] init];
-    t1.destination = @"abc";
-    t1.track = [NSNumber numberWithInt:3];
-    t1.trainNumber = [NSNumber numberWithInt:543];
-    t1.departure = @"11:01";
-    
-    //NSArray *trains = [NSArray arrayWithObject:t1];
     
     return trains;
 }

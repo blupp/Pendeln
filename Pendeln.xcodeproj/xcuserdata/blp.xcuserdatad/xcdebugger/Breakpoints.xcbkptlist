@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Pendeln/Train.m"
-         timestampString = "349617331.084434"
+         timestampString = "349619033.866864"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "50"
-         endingLineNumber = "50"
+         startingLineNumber = "48"
+         endingLineNumber = "48"
          landmarkName = "+fetchTrainDataForLocation:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -51,12 +51,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Pendeln/Train.m"
-         timestampString = "349617331.084434"
+         timestampString = "349619033.866864"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "51"
-         endingLineNumber = "51"
+         startingLineNumber = "49"
+         endingLineNumber = "49"
          landmarkName = "+fetchTrainDataForLocation:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Pendeln/PendelnTableViewController.m"
+         timestampString = "349619236.997879"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "131"
+         endingLineNumber = "131"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

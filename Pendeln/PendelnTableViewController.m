@@ -129,10 +129,9 @@
     }
     
     // Configure the cell...
-    NSDictionary *train = [trains objectAtIndex:indexPath.row];
-    cell.textLabel.text = [train objectForKey:@"destination"];
-    cell.detailTextLabel.text = [train objectForKey:@"departure"];
-    
+    Train *train = [trains objectAtIndex:indexPath.row];
+    cell.textLabel.text = train.destination;
+    cell.detailTextLabel.text = train.departure;
     
     return cell;
 }
