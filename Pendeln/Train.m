@@ -73,6 +73,7 @@
     NSMutableArray *filteredTrains = [[NSMutableArray alloc] init];
     
     // filter list based on destination
+    int i = 0;
     for (NSDictionary *train in trains) {        
         NSString *destination = [train objectForKey:@"destination"];
         
@@ -86,7 +87,10 @@
             realTrain.destination = destination;
             realTrain.departure = departure;
             
-            [filteredTrains addObject:realTrain];
+            if(i < limit) {
+                [filteredTrains addObject:realTrain];
+                i++;
+            }
         }
     } 
     

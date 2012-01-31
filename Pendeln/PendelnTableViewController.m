@@ -14,6 +14,10 @@
 
 @synthesize trains;
 
+- (id)locationChanged:(id)sender {
+    NSLog(@"KLICK");
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -37,7 +41,7 @@
 {
     [super viewDidLoad];
 
-    trains = [Train getTrainsFromLocation:@"Uppsala" toDestination:@"Stockholm" withLimit:10];
+    //trains = [Train getTrainsFromLocation:@"Uppsala" toDestination:@"Stockholm" withLimit:10];
 }
 
 - (void)viewDidUnload
@@ -101,7 +105,6 @@
         static NSString *CellIdentifier2 = @"toggleDestinationCell";
         
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2];
-        cell.textLabel.text = @"TOGGLE";
         
         NSArray *controlTitles = [NSArray arrayWithObjects:@"Uppsala", @"Stockholm", nil];
         
@@ -111,6 +114,10 @@
         [segControl setWidth:150 forSegmentAtIndex:1];
         
         [segControl setSelectedSegmentIndex:0];
+        
+        [segControl addTarget:self
+                             action:@selector(locationChanged:)
+                   forControlEvents:UIControlEventValueChanged];
         
         //[segControl segmentedControlStyle:UISegmentedControlStyleBezeled];
 
