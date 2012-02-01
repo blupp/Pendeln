@@ -15,4 +15,6 @@
 @property (nonatomic,strong) NSNumber *lat;
 @property (nonatomic,strong) NSNumber *lng;
 
+-(Station *)stationFromDictionary:(NSDictionary *)stationDictionary;
+
 @end

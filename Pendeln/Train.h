@@ -18,6 +18,8 @@
 @property (nonatomic,strong) NSString *newdeparture;
 @property (nonatomic) BOOL *direct;
 
+-(Train *)trainFromDictionary:(NSDictionary *)trainDictionary;
+
 +(NSArray *)getTrainsFromLocation:(NSString *)location toDestination:(NSString *)destination withLimit:(NSInteger)limit;
 
 @end

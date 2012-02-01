@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C0BCB4514D850700014D615 /* SB-SJ-API.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C0BCB4414D850700014D615 /* SB-SJ-API.m */; };
 		5C5E124C14C40D14003C79F0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5E124B14C40D14003C79F0 /* UIKit.framework */; };
 		5C5E124E14C40D14003C79F0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5E124D14C40D14003C79F0 /* Foundation.framework */; };
 		5C5E125014C40D14003C79F0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C5E124F14C40D14003C79F0 /* CoreGraphics.framework */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C0BCB4314D850700014D615 /* SB-SJ-API.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SB-SJ-API.h"; sourceTree = "<group>"; };
+		5C0BCB4414D850700014D615 /* SB-SJ-API.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SB-SJ-API.m"; sourceTree = "<group>"; };
 		5C5E124714C40D14003C79F0 /* Pendeln.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pendeln.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C5E124B14C40D14003C79F0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5C5E124D14C40D14003C79F0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -94,6 +97,8 @@
 				5C5E129F14D149E6003C79F0 /* Station.m */,
 				5C5E126814C40D99003C79F0 /* PendelnTableViewController.h */,
 				5C5E126914C40D99003C79F0 /* PendelnTableViewController.m */,
+				5C0BCB4314D850700014D615 /* SB-SJ-API.h */,
+				5C0BCB4414D850700014D615 /* SB-SJ-API.m */,
 				5C5E125214C40D14003C79F0 /* Supporting Files */,
 			);
 			path = Pendeln;
@@ -190,6 +195,7 @@
 				5C5E126A14C40D99003C79F0 /* PendelnTableViewController.m in Sources */,
 				5C5E127914CDCCF4003C79F0 /* Train.m in Sources */,
 				5C5E12A014D149E6003C79F0 /* Station.m in Sources */,
+				5C0BCB4514D850700014D615 /* SB-SJ-API.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +307,7 @@
 				5C5E126714C40D14003C79F0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
