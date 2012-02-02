@@ -12,8 +12,8 @@
 
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) NSNumber *stationid;
-@property (nonatomic,strong) NSNumber *lat;
-@property (nonatomic,strong) NSNumber *lng;
+//@property (nonatomic,strong) NSNumber *lat;
+//@property (nonatomic,strong) NSNumber *lng;
 
 -(Station *)stationFromDictionary:(NSDictionary *)stationDictionary;
 

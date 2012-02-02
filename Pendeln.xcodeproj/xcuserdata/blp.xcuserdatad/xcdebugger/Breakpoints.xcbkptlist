@@ -14,7 +14,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "16"
          endingLineNumber = "16"
-         landmarkName = "+filterDepartureString:"
+         landmarkName = "-trainFromDictionary:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -28,7 +28,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "36"
          endingLineNumber = "36"
-         landmarkName = "+fetchTrainDataForLocation:"
+         landmarkName = "+filterDepartureString:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -43,6 +43,20 @@
          startingLineNumber = "138"
          endingLineNumber = "138"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Pendeln/SB-SJ-API.m"
+         timestampString = "349895173.317197"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "85"
+         endingLineNumber = "85"
+         landmarkName = "-getTrainsDepartingFrom:arrivingAt:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

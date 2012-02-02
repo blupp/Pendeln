@@ -137,8 +137,8 @@
     
     // Configure the cell...
     Train *train = [trains objectAtIndex:indexPath.row];
-    cell.textLabel.text = train.destination;
-    cell.detailTextLabel.text = train.departure;
+    cell.textLabel.text = train.toStationName;
+    cell.detailTextLabel.text = train.departureTime;
     
     return cell;
 }

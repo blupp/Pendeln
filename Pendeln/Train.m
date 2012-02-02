@@ -10,7 +10,24 @@
 
 @implementation Train
 
-@synthesize destination,track,trainNumber,departure,arrival,newdeparture,direct;
+@synthesize fromStationName,toStationName,track,trainNumber,departureTime,arrivalTime,newdepartureTime,direct;
+
+-(Train *)trainFromDictionary:(NSDictionary *)trainDictionary {
+    Train *train = [[Train alloc] init];
+    
+    train.trainNumber = [trainDictionary objectForKey:@"trainNumber"];
+    train.fromStationName = [trainDictionary objectForKey:@"fromStationName"];
+    train.toStationName = [trainDictionary objectForKey:@"toStationName"];
+    //train.stops = [trainDictionary objectForKey:@"toStationName"];
+    
+    return train;
+}
+
+
+// GAMMALT ==================================================
+// GAMMALT ==================================================
+// GAMMALT ==================================================
+// GAMMALT ==================================================
 
 +(NSString *)filterDepartureString:(NSString *)departure {
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@" ([0-9]+:[0-9]+)" options:0 error:NULL];
@@ -84,8 +101,8 @@
             NSString *departure = [self filterDepartureString:[train objectForKey:@"departure"]];
             
             Train *realTrain = [[Train alloc] init];
-            realTrain.destination = destination;
-            realTrain.departure = departure;
+            realTrain.toStationName = destination;
+            realTrain.departureTime = departure;
             
             if(i < limit) {
                 [filteredTrains addObject:realTrain];

@@ -14,17 +14,17 @@
 
 
 // SJ API
--(id)makeApiRequestToURL:(NSString *)urlString;
+-(NSDictionary *)makeApiRequestToURL:(NSString *)urlString;
 
 -(NSArray *)getStations;
 
--(Station *)getStation:(int)stationid;
+-(NSDictionary *)getStation:(int)stationid;
 
--(Train *)getTrain:(int)trainNumber;
+-(NSDictionary *)getTrain:(int)trainNumber;
 
 // PENDELN API
--(Station *)getStationWithName:(NSString *)stationName;
+-(NSDictionary *)getStationWithName:(NSString *)stationName;
 
--(NSArray *)getTrainsDepartingFrom:(Station *)departingStation arrivingAt:(Station *)arrivingStation;
+-(NSDictionary *)getTrainsDepartingFrom:(NSString *)departingStationName arrivingAt:(NSString *)arrivingStationName;
 
 @end

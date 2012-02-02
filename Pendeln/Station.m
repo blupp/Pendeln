@@ -10,6 +10,15 @@
 
 @implementation Station
 
-@synthesize name,stationid,lat,lng;
+@synthesize name,stationid; //,lat,lng;
+
+-(Station *)stationFromDictionary:(NSDictionary *)stationDictionary {
+    Station *station = [[Station alloc] init];
+    
+    station.stationid = [stationDictionary objectForKey:@"id"];
+    station.name = [stationDictionary objectForKey:@"stationName"];
+    
+    return station;
+}
 
 @end

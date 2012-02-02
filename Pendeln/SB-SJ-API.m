@@ -10,7 +10,7 @@
 
 @implementation SB_SJ_API
 
-#define API_ENDPOINT    "http://sjmg.sj.se/api/"
+#define API_ENDPOINT    "http://sjmg.sj.se/api"
 
 -(NSDictionary *)makeApiRequestToURL:(NSString *)urlString {
     urlString = [NSString stringWithFormat:@"%@%@",API_ENDPOINT,urlString];
@@ -41,42 +41,93 @@
 
 #pragma SJ API CORE
 
--(NSDictionary *)getStations {
+-(NSArray *)getStations {
     NSString *urlString = @"/stations.json";
     
-    NSDictionary *stations = [self makeApiRequestToURL:urlString];
+    NSDictionary *stationsData = [self makeApiRequestToURL:urlString];
+    NSArray *stations = [stationsData objectForKey:@"stations"];
     
     return stations;
 }
 
--(Station *)getStation:(int)stationid {
+-(NSDictionary *)getStation:(int)stationid {
     NSString *urlString = [NSString stringWithFormat:@"/stationTimeTable/%d.json",stationid];
     
-    NSDictionary *stationData = [self makeApiRequestToURL:urlString];
-    
-    Station *station = [station stationFromDictionary:stationData];
-    
+    NSDictionary *station = [self makeApiRequestToURL:urlString];
+        
     return station;
 }
 
--(Train *)getTrain:(int)trainNumber {
+-(NSDictionary *)getTrain:(int)trainNumber {
     NSString *urlString = [NSString stringWithFormat:@"/trainTimeTable/%d.json",trainNumber];
 
-    NSDictionary *trainData = [self makeApiRequestToURL:urlString];
-
-    Train *train = [train trainFromDictionary:trainData];
+    NSDictionary *train = [self makeApiRequestToURL:urlString];
 
     return train;
 }
 
 #pragma FUNCTIONS
 
--(Station *)getStationWithName:(NSString *)stationName {
-    NSDictionary *stations = [self getStations];
+-(NSDictionary *)getStationWithName:(NSString *)stationName {
+    NSArray *stations = [self getStations];
+    
+    for(NSDictionary *station in stations) {
+        
+        if ([[station objectForKey:@"stationName"] rangeOfString:stationName].location != NSNotFound) {
+            return station;
+        }
+    }
+    
+    return false;
 }
 
--(NSArray *)getTrainsDepartingFrom:(Station *)departingStation arrivingAt:(Station *)arrivingStation {
+-(NSArray *)getTrainsDepartingFrom:(NSString *)departingStationName arrivingAt:(NSString *)arrivingStationName {
+    NSMutableArray *trains = [[NSMutableArray alloc] init];
+    
+    NSDictionary *departingStation = [self getStationWithName:departingStationName];
+
+    NSArray *arrivals = [departingStation objectForKey:@"arrivals"];
+    
+    // loop through the trains departing from departingStationName
+    for(NSMutableDictionary *arrival in arrivals) {
+        
+        // look for trains that stops at arrivingStationName
+        NSArray *stationNames = [arrival objectForKey:@"stationNames"];
+        for(NSString *stationName in stationNames) {
+            if ([stationName rangeOfString:arrivingStationName].location != NSNotFound) {
+                // found train!
+                
+                // check if it is a direct train
+                if([stationNames count] == 1) {
+                    [arrival setObject:[NSNumber numberWithInt:1] forKey:@"directTrain"];
+                }
+                
+                // add train to return array
+                [trains addObject:arrival];
+            }
+        }
+    }
+    
+    return [NSArray arrayWithArray:trains];
     
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
