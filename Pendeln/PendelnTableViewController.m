@@ -8,13 +8,14 @@
 
 #import "PendelnTableViewController.h"
 #import "Train.h"
+#import "SB-SJ-API.h"
 
 
 @implementation PendelnTableViewController
 
 @synthesize trains;
 
-- (id)locationChanged:(id)sender {
+- (void)locationChanged:(id)sender {
     NSLog(@"KLICK");
 }
 
@@ -40,6 +41,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    SB_SJ_API *api = [[SB_SJ_API alloc] init];
+    
+    trains = [api getTrainsDepartingFrom:@"Uppsala" arrivingAt:@"Stockholm"];
 
     //trains = [Train getTrainsFromLocation:@"Uppsala" toDestination:@"Stockholm" withLimit:10];
 }

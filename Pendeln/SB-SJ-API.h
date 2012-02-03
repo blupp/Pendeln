@@ -25,6 +25,6 @@
 // PENDELN API
 -(NSDictionary *)getStationWithName:(NSString *)stationName;
 
--(NSDictionary *)getTrainsDepartingFrom:(NSString *)departingStationName arrivingAt:(NSString *)arrivingStationName;
+-(NSArray *)getTrainsDepartingFrom:(NSString *)departingStationName arrivingAt:(NSString *)arrivingStationName;
 
 @end

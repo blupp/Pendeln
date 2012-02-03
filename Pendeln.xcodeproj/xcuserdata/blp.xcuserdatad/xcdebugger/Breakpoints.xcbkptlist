@@ -51,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Pendeln/SB-SJ-API.m"
-         timestampString = "349895173.317197"
+         timestampString = "349897622.501935"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
          landmarkName = "-getTrainsDepartingFrom:arrivingAt:"
          landmarkType = "5">
       </FileBreakpoint>
