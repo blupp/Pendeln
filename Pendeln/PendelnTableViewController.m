@@ -9,11 +9,13 @@
 #import "PendelnTableViewController.h"
 #import "Train.h"
 #import "SB-SJ-API.h"
+#import "Settings.h"
 
 
 @implementation PendelnTableViewController
 
 @synthesize trains;
+@synthesize settings;
 
 - (void)locationChanged:(id)sender {
     NSLog(@"KLICK");
@@ -43,8 +45,13 @@
     [super viewDidLoad];
     
     SB_SJ_API *api = [[SB_SJ_API alloc] init];
+    settings = [[Settings alloc] initWithSavedSettings];
     
-    trains = [api getTrainsDepartingFrom:@"Uppsala" arrivingAt:@"Stockholm"];
+    
+    
+    //trains = [api getTrainsDepartingFrom:@"Uppsala" arrivingAt:@"Stockholm"];
+    
+    //NSLog(@"%@",trains);
 
     //trains = [Train getTrainsFromLocation:@"Uppsala" toDestination:@"Stockholm" withLimit:10];
 }
@@ -111,14 +118,18 @@
         
         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2];
         
-        NSArray *controlTitles = [NSArray arrayWithObjects:@"Uppsala", @"Stockholm", nil];
+        NSArray *controlTitles = [NSArray arrayWithObjects:settings.firstStationName, settings.secondStationName, nil];
         
         UISegmentedControl *segControl = [[UISegmentedControl alloc] initWithItems:controlTitles];
         
         [segControl setWidth:150 forSegmentAtIndex:0];
         [segControl setWidth:150 forSegmentAtIndex:1];
         
-        [segControl setSelectedSegmentIndex:0];
+        if(settings.firstSelected) {
+            [segControl setSelectedSegmentIndex:0];
+        } else {
+            [segControl setSelectedSegmentIndex:1];
+        }
         
         [segControl addTarget:self
                              action:@selector(locationChanged:)

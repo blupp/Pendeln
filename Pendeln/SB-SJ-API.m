@@ -13,7 +13,7 @@
 #define API_ENDPOINT    "http://sjmg.sj.se/api"
 
 -(NSDictionary *)makeApiRequestToURL:(NSString *)urlString {
-    urlString = [NSString stringWithFormat:@"%@%@",API_ENDPOINT,urlString];
+    urlString = [NSString stringWithFormat:@"http://sjmg.sj.se/api%@",urlString];
     NSURL *url = [NSURL URLWithString:urlString];
     
     // get data from API
@@ -74,7 +74,8 @@
     for(NSDictionary *station in stations) {
         
         if ([[station objectForKey:@"stationName"] rangeOfString:stationName].location != NSNotFound) {
-            return station;
+            int stationid = [[station objectForKey:@"id"] intValue];
+            return [self getStation:stationid];
         }
     }
     
@@ -85,9 +86,9 @@
     NSMutableArray *trains = [[NSMutableArray alloc] init];
     
     NSDictionary *departingStation = [self getStationWithName:departingStationName];
-
-    NSArray *arrivals = [departingStation objectForKey:@"arrivals"];
     
+    NSArray *arrivals = [departingStation objectForKey:@"arrivals"];
+        
     // loop through the trains departing from departingStationName
     for(NSMutableDictionary *arrival in arrivals) {
         

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Settings.h"
 
 @interface PendelnTableViewController : UITableViewController
 
 @property (nonatomic,strong) NSArray *trains;
+@property (nonatomic,strong) Settings *settings;
 
 @end
