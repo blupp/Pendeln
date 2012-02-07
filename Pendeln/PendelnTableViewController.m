@@ -17,8 +17,40 @@
 @synthesize trains;
 @synthesize settings;
 
-- (void)locationChanged:(id)sender {
-    NSLog(@"KLICK");
+- (void)locationChanged:(UISegmentedControl *)sender {
+    NSLog([sender description]);
+    
+    NSLog([sender titleForSegmentAtIndex:0]);
+    
+}
+
+-(UITableViewCell *)getSegControllTableCell {
+    static NSString *CellIdentifier2 = @"toggleDestinationCell";
+    
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2];
+    
+    NSArray *controlTitles = [NSArray arrayWithObjects:settings.firstStationName, settings.secondStationName, nil];
+    
+    UISegmentedControl *segControl = [[UISegmentedControl alloc] initWithItems:controlTitles];
+    
+    [segControl setWidth:150 forSegmentAtIndex:0];
+    [segControl setWidth:150 forSegmentAtIndex:1];
+    
+    if(settings.firstSelected) {
+        [segControl setSelectedSegmentIndex:0];
+    } else {
+        [segControl setSelectedSegmentIndex:1];
+    }
+    
+    [segControl addTarget:self
+                   action:@selector(locationChanged:)
+         forControlEvents:UIControlEventValueChanged];
+    
+    //[segControl segmentedControlStyle:UISegmentedControlStyleBezeled];
+    
+    [cell.contentView addSubview:segControl];
+    
+    return cell;
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -49,11 +81,9 @@
     
     
     
-    //trains = [api getTrainsDepartingFrom:@"Uppsala" arrivingAt:@"Stockholm"];
+    trains = [api getTrainsDepartingFrom:@"Uppsala" arrivingAt:@"Stockholm"];
     
-    //NSLog(@"%@",trains);
-
-    //trains = [Train getTrainsFromLocation:@"Uppsala" toDestination:@"Stockholm" withLimit:10];
+    //NSLog(trains.description);
 }
 
 - (void)viewDidUnload
@@ -113,48 +143,20 @@
 {
     // Toggle destination-section
     if(indexPath.section == 0) {
-        
-        static NSString *CellIdentifier2 = @"toggleDestinationCell";
-        
-        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2];
-        
-        NSArray *controlTitles = [NSArray arrayWithObjects:settings.firstStationName, settings.secondStationName, nil];
-        
-        UISegmentedControl *segControl = [[UISegmentedControl alloc] initWithItems:controlTitles];
-        
-        [segControl setWidth:150 forSegmentAtIndex:0];
-        [segControl setWidth:150 forSegmentAtIndex:1];
-        
-        if(settings.firstSelected) {
-            [segControl setSelectedSegmentIndex:0];
-        } else {
-            [segControl setSelectedSegmentIndex:1];
-        }
-        
-        [segControl addTarget:self
-                             action:@selector(locationChanged:)
-                   forControlEvents:UIControlEventValueChanged];
-        
-        //[segControl segmentedControlStyle:UISegmentedControlStyleBezeled];
-
-        [cell.contentView addSubview:segControl];
-        
-        return cell;
+        return [self getSegControllTableCell];
     }
     
     static NSString *CellIdentifier = @"trainCell";
-    
-    //NSArray *trains = [Train getTrainsForLocation:@"Uppsala" withLimit:10];
-    
+        
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
-    Train *train = [trains objectAtIndex:indexPath.row];
-    cell.textLabel.text = train.toStationName;
-    cell.detailTextLabel.text = train.departureTime;
+    NSDictionary *train = [trains objectAtIndex:indexPath.row];
+    cell.textLabel.text = [train objectForKey:@"toStationName"];
+    cell.detailTextLabel.text = [[train objectForKey:@"time"] objectForKey:@"scheduledTime"];
     
     return cell;
 }

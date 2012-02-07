@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) NSString *firstStationName;
 @property (nonatomic, strong) NSString *secondStationName;
-@property (nonatomic) BOOL firstSelected;
+@property (nonatomic, strong) NSNumber *firstSelected;
 
 -(Settings *) initWithSavedSettings;
 

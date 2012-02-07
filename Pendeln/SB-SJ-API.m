@@ -14,6 +14,7 @@
 
 -(NSDictionary *)makeApiRequestToURL:(NSString *)urlString {
     urlString = [NSString stringWithFormat:@"http://sjmg.sj.se/api%@",urlString];
+    //urlString = [NSString stringWithFormat:@"http://localhost%@",urlString];
     NSURL *url = [NSURL URLWithString:urlString];
     
     // get data from API
@@ -87,7 +88,7 @@
     
     NSDictionary *departingStation = [self getStationWithName:departingStationName];
     
-    NSArray *arrivals = [departingStation objectForKey:@"arrivals"];
+    NSArray *arrivals = [departingStation objectForKey:@"departures"];
         
     // loop through the trains departing from departingStationName
     for(NSMutableDictionary *arrival in arrivals) {

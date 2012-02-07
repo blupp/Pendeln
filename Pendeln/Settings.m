@@ -40,18 +40,21 @@
     [defaults synchronize];
 }
 
--(void)setFirstSelected:(BOOL)firstSelected {
+-(void)setFirstSelected:(NSNumber *)firstSelected {
     _firstSelected = firstSelected;
     
     NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
-    [defaults setBool:firstSelected forKey:@"firstSelected"];
+    [defaults setObject: firstSelected forKey:@"firstSelected"];
     [defaults synchronize];
 }
 
--(BOOL)firstSelected {
+-(NSNumber *)firstSelected {
     NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
     
-    BOOL firstSelected = [defaults boolForKey:@"firstSelected"];
+    NSNumber *firstSelected = [defaults objectForKey:@"firstSelected"];
+    if(!firstSelected) {
+        firstSelected = [NSNumber numberWithInt:1];
+    }
     
     return firstSelected;
 }
