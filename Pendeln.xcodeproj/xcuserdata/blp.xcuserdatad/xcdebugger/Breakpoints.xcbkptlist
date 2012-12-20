@@ -37,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Pendeln/PendelnTableViewController.m"
-         timestampString = "350241477.454939"
+         timestampString = "377735483.325837"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "151"
-         endingLineNumber = "151"
+         startingLineNumber = "150"
+         endingLineNumber = "150"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -51,12 +51,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Pendeln/SB-SJ-API.m"
-         timestampString = "350295090.6256"
+         timestampString = "377735568.756342"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "89"
-         endingLineNumber = "89"
-         landmarkName = "-getTrainsDepartingFrom:arrivingAt:"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
+         landmarkName = "-getStationWithName:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -65,11 +65,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Pendeln/PendelnTableViewController.m"
-         timestampString = "350241477.454939"
+         timestampString = "377735483.325837"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "84"
-         endingLineNumber = "84"
+         startingLineNumber = "83"
+         endingLineNumber = "83"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -91,14 +91,52 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         isPathRelative = "1"
          filePath = "Pendeln/SB-SJ-API.m"
-         timestampString = "350295111.413384"
+         timestampString = "377735568.756342"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "18"
          endingLineNumber = "18"
          landmarkName = "-makeApiRequestToURL:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pendeln/SB-SJ-API.m"
+         timestampString = "377735568.756342"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "78"
+         endingLineNumber = "78"
+         landmarkName = "-getTrainsDepartingFrom:arrivingAt:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pendeln/SB-SJ-API.m"
+         timestampString = "377735568.756342"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
+         landmarkName = "-getTrainsDepartingFrom:arrivingAt:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Pendeln/SB-SJ-API.m"
+         timestampString = "377735568.756342"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "71"
+         endingLineNumber = "71"
+         landmarkName = "-getStationWithName:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -12,32 +12,20 @@
 
 #define API_ENDPOINT    "http://sjmg.sj.se/api"
 
--(NSDictionary *)makeApiRequestToURL:(NSString *)urlString {
-    urlString = [NSString stringWithFormat:@"http://sjmg.sj.se/api%@",urlString];
-    //urlString = [NSString stringWithFormat:@"http://localhost%@",urlString];
-    NSURL *url = [NSURL URLWithString:urlString];
+
+-(NSDictionary *)makeApiRequestToURL:(NSString *)apiResource {
     
-    // get data from API
-    NSData *jsonData = [NSData dataWithContentsOfURL:url];
+    apiResource = [NSString stringWithFormat:@"http://tagtider:codemocracy@api.tagtider.net/v1%@", apiResource];
+    NSLog(apiResource);
     
-    NSError *error;
-    NSDictionary *data;
-    if(jsonData) {
-        // parse JSON response
-        error = [[NSError alloc] init];
-        data = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:&error];
-    } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Anslutingsfel" message:@"Kunde inte ansluta till SJ" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [alertView show];
-        return false;
-    }
+    NSURL *url = [NSURL URLWithString:apiResource];
+    NSData *data = [NSData dataWithContentsOfURL:url];
     
-    if(error.code) {
-        // Connection error
-        return false;
-    }
+    NSError *error = [[NSError alloc] init];
+    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
     
-    return data;
+    //NSLog([jsonData debugDescription]);
+    return jsonData;
 }
 
 #pragma SJ API CORE
@@ -46,15 +34,18 @@
     NSString *urlString = @"/stations.json";
     
     NSDictionary *stationsData = [self makeApiRequestToURL:urlString];
-    NSArray *stations = [stationsData objectForKey:@"stations"];
+    //NSLog([stationsData description]);
+    NSArray *stations = [[stationsData objectForKey:@"stations"] objectForKey:@"station"];
     
     return stations;
 }
 
 -(NSDictionary *)getStation:(int)stationid {
-    NSString *urlString = [NSString stringWithFormat:@"/stationTimeTable/%d.json",stationid];
+    NSString *urlString = [NSString stringWithFormat:@"/stations/%d/transfers/departures.json",stationid];
     
     NSDictionary *station = [self makeApiRequestToURL:urlString];
+    
+    //NSLog(station.description);
         
     return station;
 }
@@ -71,10 +62,11 @@
 
 -(NSDictionary *)getStationWithName:(NSString *)stationName {
     NSArray *stations = [self getStations];
+    //NSLog(stations.description);
     
     for(NSDictionary *station in stations) {
         
-        if ([[station objectForKey:@"stationName"] rangeOfString:stationName].location != NSNotFound) {
+        if ([[station objectForKey:@"name"] rangeOfString:stationName].location != NSNotFound) {
             int stationid = [[station objectForKey:@"id"] intValue];
             return [self getStation:stationid];
         }
@@ -88,13 +80,22 @@
     
     NSDictionary *departingStation = [self getStationWithName:departingStationName];
     
-    NSArray *arrivals = [departingStation objectForKey:@"departures"];
+    //NSLog(departingStation.description);
+    
+    NSArray *arrivals = [[[departingStation objectForKey:@"station"] objectForKey:@"transfers"] objectForKey:@"transfer"];
+    
+    //NSLog([[departingStation objectForKey:@"station"] description]);
         
     // loop through the trains departing from departingStationName
     for(NSMutableDictionary *arrival in arrivals) {
+        //NSLog(arrival.description);
         
         // look for trains that stops at arrivingStationName
-        NSArray *stationNames = [arrival objectForKey:@"stationNames"];
+        if ([[arrival objectForKey:@"destination"] rangeOfString:arrivingStationName].location != NSNotFound) {
+            [trains addObject:arrival];
+        }
+        
+        /*NSArray *stationNames = [arrival objectForKey:@"stationNames"];
         for(NSString *stationName in stationNames) {
             if ([stationName rangeOfString:arrivingStationName].location != NSNotFound) {
                 // found train!
@@ -107,7 +108,7 @@
                 // add train to return array
                 [trains addObject:arrival];
             }
-        }
+        }*/
     }
     
     return [NSArray arrayWithArray:trains];
@@ -117,7 +118,46 @@
 
 
 
-
+/*urlString = [NSString stringWithFormat:@"http://sjmg.sj.se/api%@",urlString];
+ //urlString = [NSString stringWithFormat:@"http://localhost%@",urlString];
+ //    NSURL *url = [NSURL URLWithString:urlString];
+ //
+ //    // get data from API
+ //    NSData *jsonData = [NSData dataWithContentsOfURL:url];
+ 
+ //SBJsonParser *parser = [[SBJsonParser alloc] init];
+ //NSString *jsonRequestString = [parser stringWithObject:dictionaryUser];
+ //NSData *requestData = [jsonRequestString dataUsingEncoding:NSUTF8StringEncoding];
+ //NSString *requestUrl = @"http://www.shapeupclub.com/PaymentService.svc/upgradeAccountMobile";
+ NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: urlString]];
+ [request setHTTPMethod: @"GET"];
+ [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+ //[request setHTTPBody: requestData];
+ [request setTimeoutInterval:30];
+ 
+ NSError *requestError = nil;
+ NSData *jsonData = [ NSURLConnection sendSynchronousRequest: request
+ returningResponse: nil error:&requestError ];
+ 
+ NSError *error;
+ NSDictionary *data;
+ if(jsonData) {
+ // parse JSON response
+ error = [[NSError alloc] init];
+ data = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:&error];
+ NSLog(urlString);
+ NSLog(data.debugDescription);
+ } else {
+ UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Anslutingsfel" message:@"Kunde inte ansluta till SJ" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+ [alertView show];
+ return false;
+ }
+ 
+ if(error.code) {
+ // Connection error
+ NSLog(@"Error: %@",error.description);
+ return false;
+ }*/
 
 
 

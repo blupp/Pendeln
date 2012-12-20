@@ -7,7 +7,6 @@
 //
 
 #import "PendelnTableViewController.h"
-#import "Train.h"
 #import "SB-SJ-API.h"
 #import "Settings.h"
 
@@ -79,11 +78,11 @@
     SB_SJ_API *api = [[SB_SJ_API alloc] init];
     settings = [[Settings alloc] initWithSavedSettings];
     
-    
+    //[api getStationWithName:@"Uppsala"];
     
     trains = [api getTrainsDepartingFrom:@"Uppsala" arrivingAt:@"Stockholm"];
     
-    //NSLog(trains.description);
+    //NSLog([trains description]);
 }
 
 - (void)viewDidUnload
@@ -150,13 +149,15 @@
         
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier: CellIdentifier];
     }
     
     // Configure the cell...
     NSDictionary *train = [trains objectAtIndex:indexPath.row];
-    cell.textLabel.text = [train objectForKey:@"toStationName"];
-    cell.detailTextLabel.text = [[train objectForKey:@"time"] objectForKey:@"scheduledTime"];
+    cell.textLabel.text = [train objectForKey:@"destination"];
+    cell.detailTextLabel.text = [train objectForKey:@"departure"];
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
 }

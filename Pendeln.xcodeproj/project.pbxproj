@@ -17,8 +17,6 @@
 		5C5E125F14C40D14003C79F0 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C5E125D14C40D14003C79F0 /* MainStoryboard.storyboard */; };
 		5C5E126214C40D14003C79F0 /* PendelnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E126114C40D14003C79F0 /* PendelnViewController.m */; };
 		5C5E126A14C40D99003C79F0 /* PendelnTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E126914C40D99003C79F0 /* PendelnTableViewController.m */; };
-		5C5E127914CDCCF4003C79F0 /* Train.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E127814CDCCF4003C79F0 /* Train.m */; };
-		5C5E12A014D149E6003C79F0 /* Station.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E129F14D149E6003C79F0 /* Station.m */; };
 		5CD20F6F14DAFB0A00BE45C0 /* API-dumps.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5CD20F6E14DAFB0A00BE45C0 /* API-dumps.rtf */; };
 		5CD69FB514DC3E100039CA07 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD69FB414DC3E100039CA07 /* Settings.m */; };
 /* End PBXBuildFile section */
@@ -41,10 +39,6 @@
 		5C5E126114C40D14003C79F0 /* PendelnViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = PendelnViewController.m; path = Pendeln/PendelnViewController.m; sourceTree = "<group>"; };
 		5C5E126814C40D99003C79F0 /* PendelnTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendelnTableViewController.h; sourceTree = "<group>"; };
 		5C5E126914C40D99003C79F0 /* PendelnTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendelnTableViewController.m; sourceTree = "<group>"; };
-		5C5E127714CDCCF4003C79F0 /* Train.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Train.h; sourceTree = "<group>"; };
-		5C5E127814CDCCF4003C79F0 /* Train.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Train.m; sourceTree = "<group>"; };
-		5C5E129E14D149E5003C79F0 /* Station.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Station.h; sourceTree = "<group>"; };
-		5C5E129F14D149E6003C79F0 /* Station.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Station.m; sourceTree = "<group>"; };
 		5CD20F6E14DAFB0A00BE45C0 /* API-dumps.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "API-dumps.rtf"; sourceTree = "<group>"; };
 		5CD69FB314DC3E100039CA07 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		5CD69FB414DC3E100039CA07 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
@@ -96,10 +90,6 @@
 			isa = PBXGroup;
 			children = (
 				5C5E125D14C40D14003C79F0 /* MainStoryboard.storyboard */,
-				5C5E127714CDCCF4003C79F0 /* Train.h */,
-				5C5E127814CDCCF4003C79F0 /* Train.m */,
-				5C5E129E14D149E5003C79F0 /* Station.h */,
-				5C5E129F14D149E6003C79F0 /* Station.m */,
 				5C5E126814C40D99003C79F0 /* PendelnTableViewController.h */,
 				5C5E126914C40D99003C79F0 /* PendelnTableViewController.m */,
 				5C0BCB4314D850700014D615 /* SB-SJ-API.h */,
@@ -202,8 +192,6 @@
 				5C5E125C14C40D14003C79F0 /* PendelnAppDelegate.m in Sources */,
 				5C5E126214C40D14003C79F0 /* PendelnViewController.m in Sources */,
 				5C5E126A14C40D99003C79F0 /* PendelnTableViewController.m in Sources */,
-				5C5E127914CDCCF4003C79F0 /* Train.m in Sources */,
-				5C5E12A014D149E6003C79F0 /* Station.m in Sources */,
 				5C0BCB4514D850700014D615 /* SB-SJ-API.m in Sources */,
 				5CD69FB514DC3E100039CA07 /* Settings.m in Sources */,
 			);

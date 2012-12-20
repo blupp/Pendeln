@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Station.h"
-#import "Train.h"
 
 @interface SB_SJ_API : NSObject
 
