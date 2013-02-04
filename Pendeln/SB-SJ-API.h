@@ -25,4 +25,9 @@
 
 -(NSArray *)getTrainsDepartingFrom:(NSString *)departingStationName arrivingAt:(NSString *)arrivingStationName;
 
+-(NSString *)formatDateFrom:(NSString *)dateString;
+
+-(NSString *)timeLeftFrom:(NSString *)dateString;
+
+
 @end

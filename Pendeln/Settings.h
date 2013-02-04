@@ -13,6 +13,9 @@
 @property (nonatomic, strong) NSString *firstStationName;
 @property (nonatomic, strong) NSString *secondStationName;
 @property (nonatomic, strong) NSNumber *firstSelected;
+@property (nonatomic, strong) NSArray *stations;
+
++(id)SharedSettings;
 
 -(Settings *) initWithSavedSettings;
 

@@ -7,13 +7,19 @@
 //
 
 #import "SB-SJ-API.h"
+#import "Settings.h"
+#import "PendelnTableViewController.h"
 
-@implementation SB_SJ_API
+@implementation SB_SJ_API {
+    NSCache *stationsCache;
+}
 
 #define API_ENDPOINT    "http://sjmg.sj.se/api"
 
 
 -(NSDictionary *)makeApiRequestToURL:(NSString *)apiResource {
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     apiResource = [NSString stringWithFormat:@"http://tagtider:codemocracy@api.tagtider.net/v1%@", apiResource];
     NSLog(apiResource);
@@ -24,6 +30,8 @@
     NSError *error = [[NSError alloc] init];
     NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
     
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    
     //NSLog([jsonData debugDescription]);
     return jsonData;
 }
@@ -31,11 +39,35 @@
 #pragma SJ API CORE
 
 -(NSArray *)getStations {
-    NSString *urlString = @"/stations.json";
     
-    NSDictionary *stationsData = [self makeApiRequestToURL:urlString];
-    //NSLog([stationsData description]);
-    NSArray *stations = [[stationsData objectForKey:@"stations"] objectForKey:@"station"];
+    /*if(!stationsCache) {
+        stationsCache = [[NSCache alloc] init];
+    }*/
+    
+    NSArray *stations;
+    NSError *error = [[NSError alloc] init];
+    
+    NSData *jsonData = [NSData dataWithContentsOfFile:@"/tmp/stations"];
+    if(jsonData) {
+        stations = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:&error];
+    }
+    
+    //NSArray *stations;
+    //stations = [stationsCache objectForKey:@"stations"];
+    
+    if(!stations) {
+        NSString *urlString = @"/stations.json";
+        NSDictionary *stationsData = [self makeApiRequestToURL:urlString];
+        stations = [[stationsData objectForKey:@"stations"] objectForKey:@"station"];
+        
+        //[stationsCache setObject:stations forKey:@"stations"];
+        
+        NSData *data = [NSJSONSerialization dataWithJSONObject:stations options:0 error:&error];
+        [data writeToFile:@"/tmp/stations" atomically:YES];
+    } else {
+        NSLog(@"Using cached stations.json");
+    }
+    
     
     return stations;
 }
@@ -89,6 +121,10 @@
     // loop through the trains departing from departingStationName
     for(NSMutableDictionary *arrival in arrivals) {
         //NSLog(arrival.description);
+        if([[arrival objectForKey:@"type"] rangeOfString:@"SJ Regional"].location == NSNotFound) {
+            //NSLog([arrival objectForKey:@"type"]);
+            continue;
+        }
         
         // look for trains that stops at arrivingStationName
         if ([[arrival objectForKey:@"destination"] rangeOfString:arrivingStationName].location != NSNotFound) {
@@ -114,52 +150,37 @@
     return [NSArray arrayWithArray:trains];
 }
 
+-(NSString *)formatDateFrom:(NSString *)dateString {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    
+    NSDate *date = [formatter dateFromString:dateString];
+    
+    [formatter setDateFormat:@"HH:mm"];
+    
+    //NSLog([formatter stringFromDate:date]);
+        
+    return [formatter stringFromDate:date];
+}
+
+-(NSString *)timeLeftFrom:(NSString *)dateString {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    
+    NSDate *date = [formatter dateFromString:dateString];
+    
+    NSTimeInterval interval = [date timeIntervalSinceNow];
+    
+    int minutesLeft = (int)interval/60;
+    
+    if(minutesLeft < 0) {
+        minutesLeft = 0;
+    }
+    
+    return [NSString stringWithFormat:@"%i min", minutesLeft];
+}
+
 @end
-
-
-
-/*urlString = [NSString stringWithFormat:@"http://sjmg.sj.se/api%@",urlString];
- //urlString = [NSString stringWithFormat:@"http://localhost%@",urlString];
- //    NSURL *url = [NSURL URLWithString:urlString];
- //
- //    // get data from API
- //    NSData *jsonData = [NSData dataWithContentsOfURL:url];
- 
- //SBJsonParser *parser = [[SBJsonParser alloc] init];
- //NSString *jsonRequestString = [parser stringWithObject:dictionaryUser];
- //NSData *requestData = [jsonRequestString dataUsingEncoding:NSUTF8StringEncoding];
- //NSString *requestUrl = @"http://www.shapeupclub.com/PaymentService.svc/upgradeAccountMobile";
- NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: [NSURL URLWithString: urlString]];
- [request setHTTPMethod: @"GET"];
- [request setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
- //[request setHTTPBody: requestData];
- [request setTimeoutInterval:30];
- 
- NSError *requestError = nil;
- NSData *jsonData = [ NSURLConnection sendSynchronousRequest: request
- returningResponse: nil error:&requestError ];
- 
- NSError *error;
- NSDictionary *data;
- if(jsonData) {
- // parse JSON response
- error = [[NSError alloc] init];
- data = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:&error];
- NSLog(urlString);
- NSLog(data.debugDescription);
- } else {
- UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Anslutingsfel" message:@"Kunde inte ansluta till SJ" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
- [alertView show];
- return false;
- }
- 
- if(error.code) {
- // Connection error
- NSLog(@"Error: %@",error.description);
- return false;
- }*/
-
-
 
 
 

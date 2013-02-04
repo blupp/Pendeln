@@ -9,22 +9,68 @@
 #import "PendelnTableViewController.h"
 #import "SB-SJ-API.h"
 #import "Settings.h"
+#import "MBProgressHUD.h"
+#import "trainCell.h"
 
 
-@implementation PendelnTableViewController
+@implementation PendelnTableViewController {
+    PullToRefreshView *pull;
+}
 
 @synthesize trains;
-@synthesize settings;
+@synthesize api;
+@synthesize selectedIndex;
 
 - (void)locationChanged:(UISegmentedControl *)sender {
-    NSLog([sender description]);
     
-    NSLog([sender titleForSegmentAtIndex:0]);
+    NSLog([sender titleForSegmentAtIndex:[sender selectedSegmentIndex]]);
     
+    selectedIndex = [sender selectedSegmentIndex];
+    
+    NSString *stationName = [sender titleForSegmentAtIndex:[sender selectedSegmentIndex]];
+    NSString *arrivalStation;
+    if([sender selectedSegmentIndex] == 1) {
+        arrivalStation = [sender titleForSegmentAtIndex:0];
+    } else {
+        arrivalStation = [sender titleForSegmentAtIndex:1];
+    }
+    
+    // show loading view
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        trains = [api getTrainsDepartingFrom:stationName arrivingAt:arrivalStation];
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        });
+    });
+    
+}
+
+- (void)refreshCurrentView {
+    
+    dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        trains = [api getTrainsDepartingFrom:@"Uppsala" arrivingAt:@"Stockholm"];
+        
+        dispatch_async( dispatch_get_main_queue(), ^{
+            [[self tableView] reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+            [pull finishedLoading];
+        });
+    });
+}
+
+- (void)pullToRefreshViewShouldRefresh:(PullToRefreshView *)view;
+{
+    [self refreshCurrentView];
 }
 
 -(UITableViewCell *)getSegControllTableCell {
     static NSString *CellIdentifier2 = @"toggleDestinationCell";
+    Settings *settings = [Settings SharedSettings];
     
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2];
     
@@ -35,11 +81,15 @@
     [segControl setWidth:150 forSegmentAtIndex:0];
     [segControl setWidth:150 forSegmentAtIndex:1];
     
-    if(settings.firstSelected) {
+    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    /*if(settings.firstSelected) {
         [segControl setSelectedSegmentIndex:0];
     } else {
         [segControl setSelectedSegmentIndex:1];
-    }
+    }*/
+    [segControl setSelectedSegmentIndex:selectedIndex];
     
     [segControl addTarget:self
                    action:@selector(locationChanged:)
@@ -75,14 +125,37 @@
 {
     [super viewDidLoad];
     
-    SB_SJ_API *api = [[SB_SJ_API alloc] init];
-    settings = [[Settings alloc] initWithSavedSettings];
+    // Init
+    api = [[SB_SJ_API alloc] init];
     
-    //[api getStationWithName:@"Uppsala"];
-    
+    // Customize
+    self.tableView.backgroundColor = [UIColor clearColor];
+
+    // Do stuff
     trains = [api getTrainsDepartingFrom:@"Uppsala" arrivingAt:@"Stockholm"];
     
-    //NSLog([trains description]);
+    // CoreLocation
+    CLController = [[CoreLocationController alloc] init];
+	CLController.delegate = self;
+	[CLController.locMgr startUpdatingLocation];
+    
+    // Pull to refresh
+    pull = [[PullToRefreshView alloc] initWithScrollView:(UIScrollView *) self.tableView];
+    [pull setDelegate:self];
+    [self.tableView addSubview:pull];
+}
+
+- (void)locationUpdate:(CLLocation *)location {
+    
+    CLLocation *uppsalaLoc = [[CLLocation alloc] initWithLatitude:59.8586f longitude:17.6389f];
+    
+    //NSLog(@"%f",[location distanceFromLocation:uppsalaLoc]);
+    
+	//NSLog([location description]);
+}
+
+- (void)locationError:(NSError *)error {
+	NSLog([error description]);
 }
 
 - (void)viewDidUnload
@@ -138,6 +211,11 @@
     return [trains count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 65;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Toggle destination-section
@@ -147,18 +225,34 @@
     
     static NSString *CellIdentifier = @"trainCell";
         
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier: CellIdentifier];
-    }
+    trainCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     NSDictionary *train = [trains objectAtIndex:indexPath.row];
-    cell.textLabel.text = [train objectForKey:@"destination"];
-    cell.detailTextLabel.text = [train objectForKey:@"departure"];
+    cell.time.text = [api formatDateFrom:[train objectForKey:@"departure"]];
     
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.info.text = [NSString stringWithFormat:@"Tåg %@ spår %@ mot %@",[train objectForKey:@"train"],[train objectForKey:@"track"],[train objectForKey:@"destination"]];
     
+    cell.leavesIn.text = [api timeLeftFrom:[train objectForKey:@"departure"]];
+    
+    
+    if([[train objectForKey:@"newDeparture"] isKindOfClass:[NSString class]]) {
+        cell.changedTime.hidden = NO;
+        cell.changedTime.text = [NSString stringWithFormat:@"Ny tid %@",[api formatDateFrom:[train objectForKey:@"newDeparture"]]];
+        
+        cell.time.font = [UIFont fontWithName:@"Helvetica" size:14];
+        cell.strikethrough.hidden = NO;
+        
+        cell.leavesIn.text = [api timeLeftFrom:[train objectForKey:@"newDeparture"]];
+    }
+    
+    // Layout the cell
+    cell.backgroundColor = [UIColor whiteColor];
+    UIImageView *imageView = [UIImageView new];
+    imageView.image = [UIImage imageNamed:@"tableCellBg.png"];
+    //imageView.frame = CGRectOffset(cell.frame, -10, -10);
+    cell.backgroundView = imageView;
+                
     return cell;
 }
 

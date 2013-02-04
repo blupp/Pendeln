@@ -13,6 +13,9 @@
 @synthesize firstStationName = _firstStationName;
 @synthesize secondStationName = _secondStationName;
 @synthesize firstSelected = _firstSelected;
+@synthesize stations = _stations;
+
+
 
 -(Settings *) initWithSavedSettings {
     self = [super init];
@@ -20,6 +23,9 @@
     self.firstStationName = [self firstStationName];
     self.secondStationName = [self secondStationName];
     self.firstSelected = [self firstSelected];
+    self.stations = [self stations];
+    
+    NSLog(@"INIT SETTINGS");
     
     return self;
 }
@@ -40,6 +46,19 @@
     [defaults synchronize];
 }
 
+-(void)setStations:(NSArray *)stations {
+    NSLog(@"SET STATIONS");
+    //NSLog(stations.description);
+    
+    stations = [NSArray arrayWithObject:[stations objectAtIndex:34]];
+    
+    _stations = stations;
+    
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
+    [defaults setObject:stations forKey:@"stations"];
+    [defaults synchronize];
+}
+
 -(void)setFirstSelected:(NSNumber *)firstSelected {
     _firstSelected = firstSelected;
     
@@ -57,6 +76,14 @@
     }
     
     return firstSelected;
+}
+
+-(NSArray *)stations {
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
+    
+    NSArray *stations = [defaults objectForKey:@"stations"];
+    
+    return stations;
 }
 
 -(NSString *)firstStationName {
@@ -81,6 +108,15 @@
     } else {
         return @"Stockholm";
     }
+}
+
++(id)SharedSettings {
+    static Settings *sharedSettings = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedSettings = [[self alloc] init];
+    });
+    return sharedSettings;
 }
 
 @end
