@@ -29,5 +29,7 @@
 
 -(NSString *)timeLeftFrom:(NSString *)dateString;
 
+-(NSString *)trimStationName:(NSString *)stationName;
+
 
 @end

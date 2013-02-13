@@ -7,13 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SB-SJ-API.h"
 
 @interface Settings : NSObject
 
-@property (nonatomic, strong) NSString *firstStationName;
-@property (nonatomic, strong) NSString *secondStationName;
+@property (nonatomic, strong) NSString *homeStation;
+@property (nonatomic, strong) NSString *jobStation;
 @property (nonatomic, strong) NSNumber *firstSelected;
 @property (nonatomic, strong) NSArray *stations;
+
+@property (nonatomic, strong) NSUserDefaults *defaults;
+@property (nonatomic, strong) SB_SJ_API *api;
+
 
 +(id)SharedSettings;
 

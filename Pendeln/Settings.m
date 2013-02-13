@@ -7,48 +7,80 @@
 //
 
 #import "Settings.h"
+#import "SB-SJ-API.h"
 
 @implementation Settings
 
-@synthesize firstStationName = _firstStationName;
-@synthesize secondStationName = _secondStationName;
+@synthesize homeStation = _homeStation;
+@synthesize jobStation = _jobStation;
 @synthesize firstSelected = _firstSelected;
 @synthesize stations = _stations;
 
+@synthesize defaults = _defaults;
+@synthesize api = _api;
 
 
--(Settings *) initWithSavedSettings {
+
+
+-(Settings *) init {
     self = [super init];
     
-    self.firstStationName = [self firstStationName];
-    self.secondStationName = [self secondStationName];
-    self.firstSelected = [self firstSelected];
-    self.stations = [self stations];
-    
-    NSLog(@"INIT SETTINGS");
+    self.defaults = [[NSUserDefaults alloc] init];
+    self.api = [[SB_SJ_API alloc] init];
     
     return self;
 }
 
--(void)setFirstStationName:(NSString *)firstStationName {
-    _firstStationName = firstStationName;
+-(void)setHomeStation:(NSString *)homeStation {
     
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
-    [defaults setObject:firstStationName forKey:@"firstStationName"];
-    [defaults synchronize];
+    homeStation = [self.api trimStationName: homeStation];
+    
+    _homeStation = homeStation;
+    
+    [self.defaults setObject:homeStation forKey:@"homeStation"];
+    [self.defaults synchronize];
 }
 
--(void)setSecondStationName:(NSString *)secondStationName {
-    _secondStationName = secondStationName;
+-(NSString *)homeStation {
+    if(_homeStation) {
+        return _homeStation;
+    }
     
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
-    [defaults setObject:secondStationName forKey:@"secondStationName"];
-    [defaults synchronize];
+    _homeStation = [self.defaults objectForKey:@"homeStation"];
+    
+    if(!_homeStation) {
+        _homeStation = @"Uppsala";
+    }
+    
+    return _homeStation;
+}
+
+-(void)setJobStation:(NSString *)jobStation {
+    
+    jobStation = [self.api trimStationName:jobStation];
+    
+    _jobStation = jobStation;
+    
+    [self.defaults setObject:jobStation forKey:@"jobStation"];
+    [self.defaults synchronize];
+}
+
+-(NSString *)jobStation {
+    if(_jobStation) {
+        return _jobStation;
+    }
+    
+    _jobStation = [self.defaults objectForKey:@"jobStation"];
+    
+    if(!_jobStation) {
+        _jobStation = @"Stockholm";
+    }
+    
+    return _jobStation;
 }
 
 -(void)setStations:(NSArray *)stations {
     NSLog(@"SET STATIONS");
-    //NSLog(stations.description);
     
     stations = [NSArray arrayWithObject:[stations objectAtIndex:34]];
     
@@ -84,30 +116,6 @@
     NSArray *stations = [defaults objectForKey:@"stations"];
     
     return stations;
-}
-
--(NSString *)firstStationName {
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
-    
-    NSString *firstStationName = [defaults objectForKey:@"firstStationName"];
-    
-    if([firstStationName length] > 0) {
-        return firstStationName;
-    } else {
-        return @"Uppsala";
-    }
-}
-
--(NSString *)secondStationName {
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] init];
-    
-    NSString *secondStationName = [defaults objectForKey:@"secondStationName"];
-    
-    if([secondStationName length] > 0) {
-        return secondStationName;
-    } else {
-        return @"Stockholm";
-    }
 }
 
 +(id)SharedSettings {

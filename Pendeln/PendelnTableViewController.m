@@ -74,7 +74,10 @@
     
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier2];
     
-    NSArray *controlTitles = [NSArray arrayWithObjects:settings.firstStationName, settings.secondStationName, nil];
+    NSString *homeStation = [settings homeStation];
+    NSString *jobStation = [settings jobStation];
+    
+    NSArray *controlTitles = [NSArray arrayWithObjects:homeStation, jobStation, nil];
     
     UISegmentedControl *segControl = [[UISegmentedControl alloc] initWithItems:controlTitles];
     
@@ -125,14 +128,34 @@
 {
     [super viewDidLoad];
     
+    // TEST
+    
+    
+    
+    if ([@"Sala" rangeOfString:@"Sala"].location != NSNotFound) {
+        NSLog(@"hit");
+    }
+    
+    if ([@"Sala C" rangeOfString:@"Sala"].location != NSNotFound) {
+        NSLog(@"hit2");
+    }
+    
+    // END TEST
+    
+    
     // Init
     api = [[SB_SJ_API alloc] init];
+    Settings *settings = [Settings SharedSettings];
+    //[settings setHomeStation:@"Uppsala"];
+    NSString *homeStation = [settings homeStation];
+    NSString *jobStation = [settings jobStation];
+    
     
     // Customize
     self.tableView.backgroundColor = [UIColor clearColor];
 
     // Do stuff
-    trains = [api getTrainsDepartingFrom:@"Uppsala" arrivingAt:@"Stockholm"];
+    trains = [api getTrainsDepartingFrom:homeStation arrivingAt:jobStation];
     
     // CoreLocation
     CLController = [[CoreLocationController alloc] init];

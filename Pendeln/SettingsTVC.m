@@ -7,12 +7,17 @@
 //
 
 #import "SettingsTVC.h"
+#import "StationsListTVC.h"
+#import "Settings.h"
 
 @interface SettingsTVC ()
 
 @end
 
 @implementation SettingsTVC
+
+@synthesize homeStation = _homeStation;
+@synthesize jobStation = _jobStation;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -23,15 +28,23 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    Settings *settings = [[Settings alloc] init];
+    
+    UITableViewCell *cell;
+    cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    cell.detailTextLabel.text = [settings homeStation];
+    
+    cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    cell.detailTextLabel.text = [settings jobStation];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,47 +57,6 @@
 
 
 
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -96,14 +68,60 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    
+    /*StationsListTVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"stationsList"];
+    [vc setStation:^(NSString *station) {
+        NSLog(@"station = %@", station);
+    }];*/
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([[segue identifier] isEqualToString:@"thestring"]) {
-        [[segue destinationViewController] function1:argument1:argument2];
-        
+// TODO Indetifiera vilken cell man klickat på via sender istället för att ha två olika fall
+    
+    if ([[segue identifier] isEqualToString:@"homeStationsListSegue"]) {
+        StationsListTVC *stationsVC = (StationsListTVC *)segue.destinationViewController;
+        [stationsVC setStation:^(NSString *station) {
+            NSLog(@"station = %@", station);
+            self.homeStation = station;
+        }];
     }
+    
+    if ([[segue identifier] isEqualToString:@"jobStationsListSegue"]) {
+        StationsListTVC *stationsVC = (StationsListTVC *)segue.destinationViewController;
+        [stationsVC setStation:^(NSString *station) {
+            NSLog(@"station = %@", station);
+            self.jobStation = station;
+        }];
+    }
+}
+
+- (void)setHomeStation:(NSString *)homeStation {
+    NSLog(@"setHomeStation");
+    // set local var
+    _homeStation = homeStation;
+    
+    // update UI
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    cell.detailTextLabel.text = homeStation;
+    
+    // save to settings
+    Settings *settings = [Settings SharedSettings];
+    [settings setHomeStation:homeStation];
+}
+
+- (void)setJobStation:(NSString *)jobStation {
+    NSLog(@"setJobStation");
+    // set local var
+    _jobStation = jobStation;
+    
+    // update UI
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    cell.detailTextLabel.text = jobStation;
+    
+    // save to settings
+    Settings *settings = [Settings SharedSettings];
+    [settings setJobStation:jobStation];
 }
 
 @end

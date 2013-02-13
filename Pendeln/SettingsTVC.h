@@ -10,4 +10,7 @@
 
 @interface SettingsTVC : UITableViewController
 
+@property (nonatomic,strong) NSString *homeStation;
+@property (nonatomic,strong) NSString *jobStation;
+
 @end

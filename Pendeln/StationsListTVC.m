@@ -6,13 +6,17 @@
 //  Copyright (c) 2013 Bilddagboken AB. All rights reserved.
 //
 
-#import "stationsListTVC.h"
+#import "StationsListTVC.h"
+#import "SB-SJ-API.h"
+#import "Settings.h"
 
-@interface stationsListTVC ()
+@interface StationsListTVC ()
 
 @end
 
-@implementation stationsListTVC
+@implementation StationsListTVC
+
+@synthesize stations = _stations;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,6 +30,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    SB_SJ_API *api = [[SB_SJ_API alloc] init];
+    
+    self.stations = [api getStations];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -42,26 +50,24 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    
+    return [self.stations count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    SB_SJ_API *api = [[SB_SJ_API alloc] init];
+    
+    static NSString *CellIdentifier = @"stationCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    // Configure the cell
+    cell.textLabel.text = [api trimStationName:[[self.stations objectAtIndex:indexPath.row] objectForKey:@"name"]];
+    
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
     
     return cell;
 }
@@ -109,13 +115,18 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    SB_SJ_API *api = [[SB_SJ_API alloc] init];
+    // set cell as checked
+    [[self.tableView cellForRowAtIndexPath:indexPath] setAccessoryType:UITableViewCellAccessoryCheckmark];
+    
+    // send data to parent view controller    
+    if (self.station) {
+        self.station([api trimStationName:[[self.stations objectAtIndex:indexPath.row] objectForKey:@"name"]]);
+    }
+    
+    // navigate back
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 @end

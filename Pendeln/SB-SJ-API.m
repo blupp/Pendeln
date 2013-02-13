@@ -121,10 +121,11 @@
     // loop through the trains departing from departingStationName
     for(NSMutableDictionary *arrival in arrivals) {
         //NSLog(arrival.description);
-        if([[arrival objectForKey:@"type"] rangeOfString:@"SJ Regional"].location == NSNotFound) {
+        /*if([[arrival objectForKey:@"type"] rangeOfString:@"SJ Regional"].location == NSNotFound
+           && [[arrival objectForKey:@"type"] rangeOfString:@"SJ InterCity"].location == NSNotFound) {
             //NSLog([arrival objectForKey:@"type"]);
             continue;
-        }
+        }*/
         
         // look for trains that stops at arrivingStationName
         if ([[arrival objectForKey:@"destination"] rangeOfString:arrivingStationName].location != NSNotFound) {
@@ -178,6 +179,15 @@
     }
     
     return [NSString stringWithFormat:@"%i min", minutesLeft];
+}
+
+-(NSString *)trimStationName:(NSString *)stationName {
+    NSString *trimmedString=[stationName substringFromIndex:[stationName length]-2];
+    if([trimmedString isEqualToString:@" C"]) {
+        stationName = [stationName substringToIndex:[stationName length]-2];
+    }
+    
+    return stationName;
 }
 
 @end
